@@ -1,7 +1,10 @@
 import React from 'react'
 import { stepsData } from '../assets/assets'
+import { useNavigate } from 'react-router'
 
 const Instruction = () => {
+    const navigate = useNavigate()
+
   return (
     <div className="flex flex-col items-center justify-center my-24 p-6 md:px-28 mt-40">
         <h1 className="text-3xl sm:text-4xl font-semibold mb-2">How it works</h1>
@@ -19,7 +22,7 @@ const Instruction = () => {
             ))}
         </div>
 
-        <button className='sm:text-lg text-white bg-black w-auto mt-8 px-12 py-2.5 flex-wrap items-center gap-2 rounded-full'>
+        <button onClick={()=>navigate('/image')} className='sm:text-lg text-white bg-black w-auto mt-8 px-12 py-2.5 flex-wrap items-center gap-2 rounded-full'>
             Generate Images
         </button>
     </div>
