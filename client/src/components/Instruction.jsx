@@ -23,7 +23,7 @@ const Instruction = () => {
         </div>
 
         <button onClick={()=>navigate('/image')} className='sm:text-lg text-white bg-black w-auto mt-8 px-12 py-2.5 flex-wrap items-center gap-2 rounded-full'>
-            Generate Images
+            try it
         </button>
     </div>
   )
