@@ -12,7 +12,7 @@ const AIGenerator = () => {
     }
 
   return (
-    <form  onSubmit={onSumbitHandler} className='flex flex-col justify-center items-center text-center my-20'>
+    <form  onSubmit={onSumbitHandler} className='flex flex-col justify-center items-center text-center my-20 min-h-[80vh]'>
     <div>
         <div className='relative'>
             <img className='max-w-sm rounded' src={image} alt="" />
