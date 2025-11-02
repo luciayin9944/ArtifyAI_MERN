@@ -67,4 +67,46 @@ export const loginUser = async (req, res) => {
 }
 
 
+export const userCredits = async (req, res) => {
+  try {
+    const userId = req.userId; 
+    if (!userId) {
+      return res.status(401).json({ success: false, message: 'Not Authorized' });
+    }
+
+    const user = await userModel.findById(userId).select('creditBalance name');
+    if (!user) {
+      return res.status(404).json({ success: false, message: 'User not found' });
+    }
+
+    return res.status(200).json({
+      success: true,
+      credits: user.creditBalance,
+      user: { name: user.name },
+    });
+  } catch (error) {
+    console.error(error.message);
+    return res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+
+
+
+// export const userCredits = async (req, res) => {
+//     try {
+//         const {userId} = req.body
+//         const user = await userModel.findById(userId)
+//         res.status(200).json({
+//             success:true,
+//             credits: user.creditBalance,
+//             user: {name: user.name}
+//         })
+//     } catch (error) {
+//         console.log(error.message)
+//         res.status(500).json({success:false, message: error.message})
+//     }
+// }
+
+
 
