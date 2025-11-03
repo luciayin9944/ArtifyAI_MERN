@@ -5,7 +5,7 @@ import axios from 'axios'
 
 const Login = () => {
     const [state, setState] = useState('Login')
-    const { backendURL, setShowLogin, setToken, setUser } = useContext(AppContext)
+    const { backendURL, setShowLogin, setToken, setUser, setAlertMessage } = useContext(AppContext)
 
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
@@ -34,9 +34,11 @@ const Login = () => {
             setUser(data.user)
             localStorage.setItem('token', data.token)
             setShowLogin(false)
-          } 
+          }
         }
       } catch (error) {
+        const msg = error?.response?.data?.message || "Something went wrong, please try again.";
+        setAlertMessage(msg);
         console.log(error)
       }
     }
@@ -47,7 +49,6 @@ const Login = () => {
         return ()=>{
             document.body.style.overflow = 'unset';
         }
-
     }, [])
 
 
