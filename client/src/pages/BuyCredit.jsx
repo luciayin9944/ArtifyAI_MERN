@@ -1,9 +1,38 @@
 import React, { useContext } from 'react'
 import { plans } from '../assets/assets'
 import { AppContext } from '../context/AppContext'
+import axios from 'axios'
 
 const BuyCredit = () => {
-  const {user} = useContext(AppContext)
+  const {user, backendURL, token, setShowLogin, setAlertMessage } = useContext(AppContext)
+
+
+  const paymentStripe = async (planId) => {
+    try {
+      if (!user) {
+        setShowLogin(true)
+      }
+
+      const { data } = await axios.post(
+          `${backendURL}/api/user/payment`,
+          { planId },
+          { headers: { Authorization: `Bearer ${token}` } }
+      );
+      if (data.success) {
+        const { session_url } = data
+        window.location.replace(session_url)
+      } else {
+        setAlertMessage(data.message || 'Payment init failed')
+      }
+    } catch (error) {
+      const msg =
+        error?.response?.data?.message ||
+        error.message ||
+        'Payment request failed';
+      setAlertMessage(msg);
+      console.log(error);
+    }
+  };
 
   return (
     <div className='min-h-[80vh] text-center pt-14 mb-10'>
@@ -18,7 +47,7 @@ const BuyCredit = () => {
               <span className='text-3xl font-medium'>${item.price}</span>/ {item.credits} credits
             </p>
 
-            <button className='bg-zinc-800 px-10 py-3 text-white mt-8 rounded-md cursor-pointer'>{user ? 'Purchase' : 'Get Credits'}</button>
+            <button onClick={() => paymentStripe(item.id)} className='bg-zinc-800 px-10 py-3 text-white mt-8 rounded-md cursor-pointer'>{user ? 'Purchase' : 'Get Credits'}</button>
           </div>
         ))}
       </div>
