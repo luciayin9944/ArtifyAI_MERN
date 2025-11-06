@@ -18,7 +18,7 @@ const Header = () => {
   return (
     <div className='text-center'>
         <div className='text-stone-500 inline-flex items-center gap-2 bg-white px-6 py-1 rounded-full border border-neutral-500 mt-20'>
-            <p>Best text to <span className='text-lime-500'>image</span> AI-generator</p>
+            <p><span className='text-lime-500'>Best</span> AI Image Generator</p>
         </div>
         
         <h1 className='text-center mx-auto mt-10 text-4xl max-w-[300px] sm:text-7xl sm:max-w-[590px]'>Ture text to <span className='text-lime-700'>image</span>, in seconds.</h1>
